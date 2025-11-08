@@ -97,3 +97,56 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 
 Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
 # nestjs-auth-demo
+
+
+
+##  passport
+- অথেন্টিকেশনের জন্য standard protocol provide করে
+- বিভিন্ন strategy (Local, JWT, Google, Facebook) support করে
+- Session এবং token-based authentication handle করে
+
+## passport-local
+- Username এবং password-based authentication
+
+- আমাদের auth/login endpoint-এ ব্যবহার করেছি
+
+- Database-এ username/password verify করে
+
+
+##  @nestjs/jwt
+- JWT token generate করতে (jwtService.sign(payload))
+
+- Token verify করতে (jwtService.verify(token))
+
+- Token decode করতে
+
+##  passport-jwt
+- HTTP request-এর header থেকে JWT token extract করে
+
+- Token validate করে
+
+- Valid হলে user information return করে
+
+## @types/passport-local & @types/passport-jwt
+- TypeScript-কে Passport সম্পর্কে type information দেয়
+
+- Better IntelliSense এবং auto-completion দেয়
+
+- Type safety provide করে
+
+
+
+## Flow ১: লগইন প্রক্রিয়া (passport-local)
+
+User Login Request 
+    → passport-local strategy 
+    → validateUser() check 
+    → JWT token generate (@nestjs/jwt)
+    → Token user-কে return
+## Flow ২: প্রোটেক্টেড রাউট এক্সেস (passport-jwt)
+
+User Request with Token 
+    → passport-jwt strategy 
+    → Token verify 
+    → User information extract 
+    → Route handler execute
